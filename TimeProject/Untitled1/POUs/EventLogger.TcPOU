@@ -5,7 +5,7 @@
 VAR
 	EventBuffer : ARRAY[1..MAXIMUM_SIZE_OF_EVENT_BUFFER] OF ST_Event; 
 	CurrentEventBufferIndex : INT := 0;    
-	
+	CurrentEventBufferIndex1 : INT := 1;    
 	_PersistentEventStorage : I_PersistentEventStorage; // 声明接口类型的变量
 END_VAR
 VAR CONSTANT
