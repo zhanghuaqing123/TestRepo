@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{13185b6b-a79d-4670-baef-b513526d344b}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	//stThisIsOurFirstInstanceOfStructure : ST_Event;
+	bBoolean : BOOL := FALSE;
+	
+	eEventType1 : E_EventType := E_EventType.Alarm;
+	eEventSeverity1 : TcEventSeverity := TcEventSeverity.Error;
+	nEventIdentity1 : UDINT := 42;
+	sEventText1 : STRING(255) := 'This is a scary event';
+	
+
+	CsvPersistentEventStorage : FB_CsvPersistentEventStorage;
+	EventLogger : EventLogger(CsvPersistentEventStorage); //传递init所需要的参数
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//IF NOT bBoolean THEN
+	//UpdateEventTimestampWithSystemTime(stEvent := stThisIsOurFirstInstanceOfStructure);
+	//bBoolean := TRUE;
+//END_IF
+IF bBoolean THEN
+	EventLogger.AddEvent(eEventType := eEventType1,eEventSeverity1,nEventIdentity1,sEventText1);
+	bBoolean := FALSE;
+END_IF
+
+CsvPersistentEventStorage();]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="9" Count="0" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="10" Count="1" />
+      <LineId Id="22" Count="1" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="38" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

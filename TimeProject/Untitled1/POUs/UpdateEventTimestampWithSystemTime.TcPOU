@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="UpdateEventTimestampWithSystemTime" Id="{5235ad37-4cf3-4d23-b79c-79031989d273}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION UpdateEventTimestampWithSystemTime
+VAR_INPUT
+	stEvent : REFERENCE TO ST_Event;
+	
+END_VAR
+VAR
+	//fGetSystemTime : F_GetSystemTime; //实例化
+	(*stFileTime : FILETIME64_TO_DT; //实例化，需要再reference中加入相关引用*)
+	timeAsFileTime : T_FILETIME64;
+	(*timeAsDT : DT;*)
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[timeAsFileTime := F_GetSystemTime();
+stEvent.dtTimeStamp := FILETIME64_TO_DT(timeAsFileTime);]]></ST>
+    </Implementation>
+    <LineIds Name="UpdateEventTimestampWithSystemTime">
+      <LineId Id="7" Count="0" />
+      <LineId Id="19" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
